@@ -1,0 +1,67 @@
+<!-- 注册组件的表单母板 -->
+<!-- angular 处理表单验证required是无效的，需要通过ng来实现 -->
+
+<div class="container">
+  <!-- #form 模板引用变量 #form="ngForm" 这是一个特殊的指令-->
+  <form #form="ngForm" class="form-signin" (submit)="signup()">
+    <h2 class="form-signin-heading">Please sign up</h2>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <!-- #email 是模板引用变量  -->
+    <!-- email="true" 是邮箱a格式 -->
+    <input
+      email="true"
+      type="email"
+      id="inputEmail"
+      class="form-control"
+      placeholder="Email address"
+      required
+      name="email"
+      [(ngModel)]="signupForm.email"
+      #email="ngModel"
+    />
+
+    <!-- <div
+      *ngIf="email.invalid && (email.dirty || email.touched)"
+      class="alert alert-danger"
+    >
+      <div *ngIf="email.errors.required">email is required.</div>
+      <div *ngIf="email.errors.email">Invalid email</div>
+    </div> -->
+
+    <!-- Angular 表单双向绑定会为绑定的元素提供一些特殊的类名 -->
+    <!-- <p>{{ email.className }}</p> -->
+    <div *ngIf="email_err_msg" class="alert alert-danger">
+      {{ email_err_msg }}
+    </div>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input
+      type="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="Password"
+      required
+      name="password"
+      [(ngModel)]="signupForm.password"
+      #password="ngModel"
+      minlength="6"
+      maxlength="18"
+    />
+    <!-- <div
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="password.errors.required">password is required.</div>
+        <div *ngIf="password.errors.minlength">password minlength 6</div>
+        <div *ngIf="password.errors.password">Invalid password</div>
+      </div> -->
+
+    <!-- [disabled]="!form.form.vaild" 表单禁用情况 也无法使用  49集 -->
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+      Sign up
+    </button>
+  </form>
+  <p class="info">
+    <!-- Angular 为我们提供的路由跳转功能 -->
+    <a routerLink="/signin">Already have an account? Login here.</a>
+  </p>
+</div>

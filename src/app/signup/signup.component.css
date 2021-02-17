@@ -1,0 +1,9 @@
+@import url('../signin/signin.component.css');
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; 
+}
+
+/* 验证失败时候的表现 */
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; 
+}
